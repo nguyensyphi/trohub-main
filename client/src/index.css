@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Quicksand:wght@300..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: 120 20% 95%; /* Xanh lá nhạt làm nền */
+    --foreground: 120 25% 20%; /* Chữ xanh lá đậm */
+    --card: 120 20% 95%; /* Màu nền cho thẻ */
+    --card-foreground: 120 25% 20%; /* Chữ trên thẻ */
+    --popover: 120 20% 95%;
+    --popover-foreground: 120 25% 20%;
+
+    --primary: 120 40% 40%; /* Xanh lá chủ đạo */
+    --primary-foreground: 0 0% 100%; /* Chữ trắng trên màu chính */
+    --secondary: 120 30% 85%; /* Xanh lá nhạt cho phụ */
+    --secondary-foreground: 120 40% 20%; /* Chữ đậm hơn trên nền nhạt */
+    --muted: 120 20% 90%; /* Xanh lá nhẹ cho các phần mờ */
+    --muted-foreground: 120 25% 35%; /* Chữ đậm hơn trên nền muted */
+    --accent: 120 50% 35%; /* Xanh lá đậm làm màu nhấn */
+    --accent-foreground: 0 0% 100%; /* Chữ trắng trên màu nhấn */
+
+    --destructive: 0 65% 55%; /* Giữ đỏ cho hành động phá hủy */
+    --destructive-foreground: 0 0% 100%;
+    --border: 120 20% 85%; /* Đường viền xanh lá nhạt */
+    --input: 120 20% 85%; /* Màu nền cho ô nhập liệu */
+    --ring: 120 35% 50%; /* Vòng sáng màu xanh lá đậm */
+
+    --chart-1: 120 40% 50%; /* Các màu phụ cho biểu đồ */
+    --chart-2: 120 30% 60%;
+    --chart-3: 120 35% 40%;
+    --chart-4: 120 50% 30%;
+    --chart-5: 120 55% 25%;
+    --radius: 0.5rem; /* Độ bo tròn các phần tử */
+  }
+
+  .dark {
+    --background: 120 25% 10%; /* Xanh lá đậm cho nền tối */
+    --foreground: 120 40% 90%; /* Chữ sáng hơn */
+    --card: 120 25% 10%;
+    --card-foreground: 120 40% 90%;
+    --popover: 120 25% 10%;
+    --popover-foreground: 120 40% 90%;
+
+    --primary: 120 35% 55%; /* Xanh lá sáng cho dark mode */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 120 30% 20%; /* Xanh lá đậm hơn */
+    --secondary-foreground: 120 40% 90%;
+    --muted: 120 25% 15%; /* Xanh lá đậm nhẹ cho muted */
+    --muted-foreground: 120 35% 60%;
+    --accent: 120 45% 40%; /* Xanh lá nhấn */
+    --accent-foreground: 120 40% 90%;
+
+    --destructive: 0 65% 40%; /* Màu đỏ đậm cho phá hủy */
+    --destructive-foreground: 120 40% 90%;
+    --border: 120 20% 25%; /* Đường viền xanh lá đậm */
+    --input: 120 20% 25%; /* Màu ô nhập liệu */
+    --ring: 120 40% 50%; /* Vòng sáng màu xanh lá */
+
+    --chart-1: 120 60% 45%;
+    --chart-2: 120 50% 40%;
+    --chart-3: 120 45% 35%;
+    --chart-4: 120 70% 30%;
+    --chart-5: 120 55% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-white text-foreground;
+  }
+}
