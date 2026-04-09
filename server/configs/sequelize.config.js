@@ -20,11 +20,15 @@ module.exports = {
     port: process.env.DB_PORT,
     logging: false,
     timezone: "+07:00",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
+    ...(process.env.DB_SSL === "false"
+      ? {}
+      : {
+          dialectOptions: {
+            ssl: {
+              require: true,
+              rejectUnauthorized: false,
+            },
+          },
+        }),
   },
 }

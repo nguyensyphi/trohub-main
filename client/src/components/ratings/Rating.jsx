@@ -61,7 +61,7 @@ const Rating = ({ averageStar = 0, idPost, onMutate, voters = [] }) => {
           <ConditionRender show={!me}>
             <p className="text-center text-sm">
               Bạn chưa đăng nhập, vui lòng hãy{" "}
-              <span className="underline cursor-pointer text-blue-600 font-bold" onClick={redirectLogin}>
+              <span className="underline cursor-pointer text-primary font-bold" onClick={redirectLogin}>
                 đăng nhập
               </span>{" "}
               trước khi đánh giá 😊

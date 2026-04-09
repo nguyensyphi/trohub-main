@@ -11,14 +11,14 @@ import { Link, useLocation } from "react-router-dom"
 const Navigation = () => {
   const location = useLocation()
   return (
-    <div className="h-10 text-sm text-slate-50 grid place-content-center bg-primary top-[70px] z-10 sticky">
+    <div className="h-11 text-sm text-primary-foreground grid place-content-center bg-primary shadow-sm top-[70px] z-10 sticky border-b border-primary/20">
       <NavigationMenu>
         <NavigationMenuList className="w-main flex items-center justify-start h-full m-auto">
           {navigations.map((el) => (
             <NavigationMenuItem
               className={cn(
-                "h-10 cursor-pointer flex items-center hover:bg-slate-800",
-                location.pathname === "/" + el.pathname && "bg-slate-800"
+                "h-11 cursor-pointer flex items-center transition-colors hover:bg-primary-foreground/15",
+                location.pathname === "/" + el.pathname && "bg-primary-foreground/20"
               )}
               key={el.id}
             >

@@ -3,10 +3,11 @@ import { endpoints, externalFetcher } from "./axios"
 import axios from "axios"
 import { useMemo } from "react"
 
-export const apiGetGoogleCredentials = (accesstoken) =>
+export const apiGetGoogleCredentials = (accessToken) =>
   axios({
     method: "get",
-    url: endpoints.auth.getCredentialGoogle + accesstoken,
+    url: endpoints.auth.getCredentialGoogle,
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
 
 export const useGetAllProvinces = (options) => {

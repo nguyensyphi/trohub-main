@@ -111,7 +111,7 @@ const AdminGeneral = () => {
       <Section title="Tổng quan">
         <div className="py-4">
           <div className="grid grid-cols-4 gap-4">
-            <div className="col-span-1 bg-blue-500 p-4 border rounded-md flex items-center justify-between gap-4">
+            <div className="col-span-1 bg-primary p-4 border border-primary/20 rounded-xl flex items-center justify-between gap-4 shadow-sm">
               <span className="text-3xl font-bold text-slate-50">{data?.createdUser}</span>
               <span className="flex text-white flex-col gap-2 items-end">
                 <span>
@@ -120,7 +120,7 @@ const AdminGeneral = () => {
                 <span>Thành viên mới</span>
               </span>
             </div>
-            <div className="col-span-1 bg-orange-500 p-4 border rounded-md flex items-center justify-between gap-4">
+            <div className="col-span-1 bg-chart-5/90 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm">
               <span className="text-3xl font-bold text-slate-50">{shortNumber(+data?.totalIncomes)}</span>
               <span className="flex text-white flex-col gap-2 items-end">
                 <span>
@@ -129,7 +129,7 @@ const AdminGeneral = () => {
                 <span>Thu nhập</span>
               </span>
             </div>
-            <div className="col-span-1 bg-green-500 p-4 border rounded-md flex items-center justify-between gap-4">
+            <div className="col-span-1 bg-chart-1 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm">
               <span className="text-3xl font-bold text-slate-50">
                 {data?.posts?.reduce((sum, el) => sum + Number(el.createdPost), 0)}
               </span>
@@ -140,9 +140,9 @@ const AdminGeneral = () => {
                 <span>Bài đăng mới</span>
               </span>
             </div>
-            <div className="col-span-1 bg-yellow-500 p-4 border rounded-md flex items-center justify-between gap-4">
-              <span className="text-3xl font-bold text-slate-50">{data?.anonymous + data?.registed}</span>
-              <span className="flex text-slate-50 flex-col gap-2 items-end">
+            <div className="col-span-1 bg-chart-4 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm text-slate-900">
+              <span className="text-3xl font-bold">{data?.anonymous + data?.registed}</span>
+              <span className="flex flex-col gap-2 items-end opacity-90">
                 <span>
                   <EyeIcon size={20} />
                 </span>
@@ -152,7 +152,7 @@ const AdminGeneral = () => {
           </div>
         </div>
         <div className="mt-6 px-4 grid grid-cols-10 gap-4">
-          <div className="col-span-7 h-fit border flex flex-col gap-4 relative rounded-md flex-auto p-4">
+          <div className="col-span-7 h-fit border border-border flex flex-col gap-4 relative rounded-xl flex-auto p-4 bg-card shadow-sm">
             <span className="font-bold">{`Số tin đăng mới thống kê theo ${isMonth ? "tháng" : "ngày"}`}</span>
             <div className="flex items-center justify-between">
               <span className="font-bold flex items-center gap-8">
@@ -177,7 +177,7 @@ const AdminGeneral = () => {
                   </span>
                   <button
                     type="button"
-                    className={`px-4 py-2 rounded-md border-blue-500 text-blue-500 border`}
+                    className="px-4 py-2 rounded-md border border-primary text-primary"
                     onClick={handleCustomTime}
                   >
                     Default

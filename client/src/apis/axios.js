@@ -44,7 +44,7 @@ export const externalFetcher = async (args) => {
 
 export const endpoints = {
   auth: {
-    getCredentialGoogle: "https://www.googleapis.com/oauth2/v1/userinfo?access_token=",
+    getCredentialGoogle: "https://www.googleapis.com/oauth2/v3/userinfo",
     googleLogin: "/auth/google",
     loginEmail: "/auth/login-email",
     loginPhone: "/auth/login-phone",
@@ -92,6 +92,7 @@ export const endpoints = {
   },
   payment: {
     depositVnpay: "/payment/deposit",
+    depositMomo: "/payment/deposit-momo",
     depositQR: "/payment/create-order",
   },
   chatbot: {

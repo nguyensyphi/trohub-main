@@ -134,7 +134,7 @@ const PostCard = ({
                   onCheckedChange={() => onCheckedChange(post.id)}
                   className={cn(
                     "absolute bottom-3 border-slate-50 left-3 group-hover:block hidden",
-                    checked && "block border-blue-600"
+                    checked && "block border-primary"
                   )}
                 />
               )}
@@ -178,7 +178,7 @@ const PostCard = ({
                   <DropdownMenuTrigger asChild>
                     <Button
                       onClick={() => setIsShowOption(true)}
-                      className="w-fit p-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-fit bg-transparent text-slate-900 hover:text-blue-600 hover:bg-transparent"
+                      className="w-fit p-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-fit bg-transparent text-foreground hover:text-primary hover:bg-transparent"
                     >
                       <EllipsisVertical size={16} />
                     </Button>
@@ -235,7 +235,7 @@ const PostCard = ({
                 </DropdownMenu>
               )}
             </div>
-            <p className="flex items-center font-bold text-blue-600 text-lg gap-4">
+            <p className="flex items-center font-bold text-primary text-lg gap-4">
               <span>{`${shortNumber(price)}`}</span>
               <span>
                 <span>{size}</span>
@@ -284,7 +284,7 @@ const PostCard = ({
             <div className="flex items-center justify-between">
               <span className="text-xs italic">{"Đăng " + fromNow(createdAt)}</span>
               {isShowWislish && (
-                <Button className="w-fit p-0 h-fit bg-transparent text-slate-900 hover:text-blue-600 hover:bg-transparent">
+                <Button className="w-fit p-0 h-fit bg-transparent text-foreground hover:text-primary hover:bg-transparent">
                   <Heart />
                 </Button>
               )}

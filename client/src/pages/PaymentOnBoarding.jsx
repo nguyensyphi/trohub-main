@@ -13,7 +13,7 @@ const PaymentOnBoarding = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    document.title = "PTCB - Thanh toán Paypal"
+    document.title = "TroHub — Thanh toán PayPal"
   }, [])
 
   if (!me) {

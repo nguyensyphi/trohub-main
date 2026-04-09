@@ -269,7 +269,7 @@ const CreatePost = () => {
                       </span>
                     }
                   >
-                    <Info size={16} className="text-blue-500" />
+                    <Info size={16} className="text-primary" />
                   </CustomTooltip>
                 }
               />
@@ -291,7 +291,7 @@ const CreatePost = () => {
                 readOnly={true}
                 info={
                   <CustomTooltip explain="Tổng tiền thanh toán = Số tiền gói tin đăng x Số ngày hạn tin đăng">
-                    <Info size={16} className="text-blue-500" />
+                    <Info size={16} className="text-primary" />
                   </CustomTooltip>
                 }
               />

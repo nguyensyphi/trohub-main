@@ -3,7 +3,7 @@ import NavMenu from "./NavMenu"
 
 const UserSidebar = () => {
   return (
-    <div className="bg-white w-full h-full">
+    <div className="bg-card border-r border-border w-full h-full">
       <UserBox />
       <NavMenu />
     </div>

@@ -132,7 +132,7 @@ const Personal = () => {
                         Bạn muốn đăng tin?{" "}
                         <Dialog>
                           <DialogTrigger>
-                            <span className="text-xs ml-2 underline cursor-pointer text-blue-600">
+                            <span className="text-xs ml-2 underline cursor-pointer text-primary">
                               Nâng cấp tài khoản thành chủ trọ!
                             </span>
                           </DialogTrigger>

@@ -30,10 +30,13 @@ const Header = () => {
   }
 
   return (
-    <div className="h-[70px] flex-none w-full py-[15px] border-b bg-background sticky top-0 z-20 flex items-center justify-between">
+    <div className="h-[70px] flex-none w-full py-[15px] border-b border-border/80 bg-card/80 backdrop-blur-md supports-[backdrop-filter]:bg-card/70 sticky top-0 z-20 flex items-center justify-between shadow-sm">
       <div className="w-main flex items-center justify-between mx-auto">
-        <Link to="/" className="text-4xl text-primary font-bungee">
-          PHONGTROXANH
+        <Link
+          to="/"
+          className="text-xl sm:text-2xl font-extrabold tracking-tight text-primary hover:opacity-90 transition-opacity"
+        >
+          TroHub
         </Link>
         <div className="flex items-center gap-3">
           {me && (
@@ -66,7 +69,7 @@ const Header = () => {
                     {menu.map((el) => (
                       <NavigationMenuLink asChild key={el.id}>
                         <Link
-                          className="col-span-1 flex items-center gap-2 rounded text-sm hover:bg-space-holder-color px-2 whitespace-nowrap py-1 cursor-pointer"
+                          className="col-span-1 flex items-center gap-2 rounded-md text-sm hover:bg-muted px-2 whitespace-nowrap py-1.5 cursor-pointer"
                           to={"/" + el.path}
                         >
                           {el.icon}
@@ -74,10 +77,10 @@ const Header = () => {
                         </Link>
                       </NavigationMenuLink>
                     ))}
-                    <div className="w-full h-[1px] border-t border-slate-200 my-1"></div>
+                    <div className="w-full h-px bg-border my-1" />
                     <div
                       onClick={handleLogOut}
-                      className="col-span-1 flex items-center gap-2 rounded text-sm hover:bg-space-holder-color px-2 whitespace-nowrap py-1 cursor-pointer"
+                      className="col-span-1 flex items-center gap-2 rounded-md text-sm hover:bg-muted px-2 whitespace-nowrap py-1.5 cursor-pointer"
                     >
                       <LogOut size="14" />
                       <span>Đăng xuất</span>

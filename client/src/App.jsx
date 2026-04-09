@@ -20,7 +20,7 @@ const App = () => {
   }, [token])
 
   return (
-    <main className="relative font-quicksand">
+    <main className="relative font-sans">
       <Outlet />
       <Toaster position="top-center" expand={false} richColors />
     </main>

@@ -13,5 +13,5 @@ module.exports = {
     "Hệ thống cách âm",
   ],
   paymentStatus: ["Thành công", "Đang chờ", "Thất bại"],
-  paymentMethod: ["Paypal", "VNPay"],
+  paymentMethod: ["Paypal", "VNPay", "MoMo"],
 }

@@ -9,7 +9,7 @@ const UserBox = () => {
         <img
           src={me?.avatar || generateDefaultAvatar(me?.fullname?.toLowerCase())}
           alt="Avatar"
-          className="w-16 h-16 border-slate-200 object-cover rounded-full border-2"
+          className="w-16 h-16 border-border object-cover rounded-full border-2"
         />
       </div>
       <div>

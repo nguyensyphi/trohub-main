@@ -8,7 +8,8 @@ const options = {
   timezone: "+07:00",
   port: Number(process.env.DB_PORT),
 }
-if (env === "production")
+const sslDisabled = process.env.DB_SSL === "false"
+if (env === "production" && !sslDisabled)
   options.dialectOptions = {
     ssl: {
       require: true,

@@ -48,14 +48,14 @@ const CustomDropBox = ({ onSelect, isMultiple = false, media = [], onRemove, err
           {media.map((el) => (
             <div key={el} className="w-full aspect-[3/2] relative">
               {handleClassifyMedia(el) === "IMAGE" && (
-                <img src={el} alt="Item" className="w-full h-full object-cover border border-blue-900/70" />
+                <img src={el} alt="Item" className="w-full h-full object-cover border border-primary/30" />
               )}
               {handleClassifyMedia(el) === "VIDEO" && (
                 <video
                   controls
                   src={el}
                   alt="Item"
-                  className="w-full h-full object-cover border border-blue-900/70"
+                  className="w-full h-full object-cover border border-primary/30"
                 />
               )}
               <span

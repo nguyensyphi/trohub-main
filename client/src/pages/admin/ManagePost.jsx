@@ -194,7 +194,7 @@ const ManagePost = () => {
                       onOpenChange={(open) => (open ? setEditPost(el) : setEditPost(null))}
                     >
                       <DialogTrigger>
-                        <Edit onClick={() => setEditPost(el)} size={14} className="text-blue-500" />
+                        <Edit onClick={() => setEditPost(el)} size={14} className="text-primary" />
                       </DialogTrigger>
                       <DialogContent>
                         <DialogHeader>

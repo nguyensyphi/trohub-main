@@ -29,6 +29,8 @@ const formPhoneSchema = z.object({
   password: z.string().min(6, { message: "Mật khẩu tối thiểu 6 ký tự" }),
 })
 
+const googleOAuthConfigured = Boolean((import.meta.env.VITE_CLIENT_GG_ID || "").trim())
+
 const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
@@ -88,28 +90,44 @@ const Login = () => {
   }
 
   const handleLoginGoogle = useGoogleLogin({
+    scope: "openid email profile",
     onSuccess: async (response) => {
       if (!response.access_token) return toast.error("Có lỗi, hãy thử lại nhé~")
-      const credentialsRes = await apiGetGoogleCredentials(response.access_token)
-      if (credentialsRes.status === 200) {
-        toast.success("Đăng nhập thành công.")
-        const payload = {
-          fullname: credentialsRes.data.name,
-          email: credentialsRes.data.email,
-          avatar: credentialsRes.data.picture,
+      try {
+        const credentialsRes = await apiGetGoogleCredentials(response.access_token)
+        if (credentialsRes.status === 200 && credentialsRes.data?.email) {
+          toast.success("Đăng nhập thành công.")
+          const payload = {
+            fullname: credentialsRes.data.name || credentialsRes.data.email,
+            email: credentialsRes.data.email,
+            avatar: credentialsRes.data.picture,
+          }
+          setGoogleData(payload)
+          setIsSetUpPassword(true)
+        } else {
+          toast.error("Không lấy được thông tin tài khoản Google.")
         }
-        setGoogleData(payload)
-        setIsSetUpPassword(true)
+      } catch (err) {
+        console.error("Google userinfo:", err)
+        toast.error("Không lấy được thông tin tài khoản Google.")
       }
     },
     onError: (error) => {
-      console.log("Login failure:", error)
+      console.error("Google OAuth:", error)
+      const t = error?.type || error?.error
+      if (t === "popup_closed_by_user" || t === "user_cancelled") {
+        toast.error("Bạn đã đóng cửa sổ đăng nhập Google.")
+        return
+      }
+      toast.error(
+        "Đăng nhập Google thất bại. Nếu bạn đổi domain: vào Google Cloud Console → Credentials → OAuth 2.0 Client (Web) → Authorized JavaScript origins — thêm đúng origin (vd: https://tenmien.com, không có dấu / cuối; thêm cả http://localhost:5173 khi dev)."
+      )
     },
   })
 
   return (
-    <div className="h-full flex justify-center py-24">
-      <div className="w-[700px] bg-white border border-slate-200 h-fit rounded-md grid grid-cols-10">
+    <div className="h-full min-h-[70vh] flex justify-center py-16 md:py-24 bg-muted/30">
+      <div className="w-[700px] max-w-[calc(100%-2rem)] bg-card border border-border h-fit rounded-2xl shadow-soft grid grid-cols-10 overflow-hidden">
         <div className="col-span-4 flex items-center justify-center p-8">
           <img src="Login.svg" alt="banner" className="w-full object-contain" />
         </div>
@@ -224,16 +242,33 @@ const Login = () => {
               </form>
             </Form>
             <div className="w-full h-6 flex items-center relative my-4">
-              <div className="border-slate-200 border-t w-full h-[1px]"></div>
+              <div className="border-border border-t w-full h-px" />
               <div className="absolute inset-0 bg-transparent w-fit mx-auto">
-                <p className="text-slate-500 bg-white px-2 text-sm">Hoặc</p>
+                <p className="text-muted-foreground bg-card px-2 text-sm">Hoặc</p>
               </div>
             </div>
             <div className="space-y-4">
-              <Button className="w-full" onClick={() => handleLoginGoogle()} variant="outline">
+              <Button
+                className="w-full"
+                type="button"
+                onClick={() => handleLoginGoogle()}
+                variant="outline"
+                disabled={!googleOAuthConfigured}
+                title={
+                  !googleOAuthConfigured
+                    ? "Thiếu VITE_CLIENT_GG_ID — thêm vào biến môi trường khi build"
+                    : undefined
+                }
+              >
                 <img src="/Google.svg" alt="google logo" className="w-5 h-5 mr-3 object-cover" />
                 <span>Đăng nhập với Google</span>
               </Button>
+              {!googleOAuthConfigured && (
+                <p className="text-xs text-muted-foreground text-center">
+                  Google chưa bật: cần <code className="text-[0.7rem]">VITE_CLIENT_GG_ID</code> khi build, và
+                  origin production trong Google Cloud Console.
+                </p>
+              )}
             </div>
             {!isRegister ? (
               <p className="text-sm mt-4 text-center">

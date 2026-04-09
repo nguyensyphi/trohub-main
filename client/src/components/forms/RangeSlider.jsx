@@ -29,7 +29,7 @@ const RangeSlider = ({ min = 0, max = 100, step = 1, values = [0, 100], onChange
         </div>
       )}
       renderThumb={({ props }) => (
-        <div {...props} key={props.key} className="w-4 h-4 rounded-full border bg-blue-600" />
+        <div {...props} key={props.key} className="w-4 h-4 rounded-full border border-primary bg-primary" />
       )}
     />
   )

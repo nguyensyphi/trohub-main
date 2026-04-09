@@ -219,7 +219,7 @@ const ManageNews = () => {
                       onCheckedChange={() => handleCheckCard(el.id)}
                       className={cn(
                         "absolute bottom-3 border-slate-50 left-3 group-hover:block hidden",
-                        cards[idx]?.isChecked && "block border-blue-600"
+                        cards[idx]?.isChecked && "block border-primary"
                       )}
                     />
                   </div>
@@ -227,7 +227,7 @@ const ManageNews = () => {
                 <div className="p-4 w-full relative">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button className="w-fit absolute top-4 right-1 p-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-fit bg-transparent text-slate-900 hover:text-blue-600 hover:bg-transparent">
+                      <Button className="w-fit absolute top-4 right-1 p-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-fit bg-transparent text-foreground hover:text-primary hover:bg-transparent">
                         <EllipsisVertical size={16} />
                       </Button>
                     </DropdownMenuTrigger>

@@ -24,7 +24,7 @@ const Comments = ({ onMutate, comments = [] }) => {
       <ConditionRender show={!me}>
         <p>
           Bạn phải{" "}
-          <span className="underline cursor-pointer text-blue-600 font-bold" onClick={redirectLogin}>
+          <span className="underline cursor-pointer text-primary font-bold" onClick={redirectLogin}>
             đăng nhập
           </span>{" "}
           trước mới được comment.

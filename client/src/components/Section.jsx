@@ -12,10 +12,10 @@ const Section = ({ children, title, className, isBack = false, onBack }) => {
     else navigate(-1)
   }
   return (
-    <div className={cn("rounded-md mx-auto bg-white space-y-6 border p-6 border-slate-100", className)}>
+    <div className={cn("rounded-xl mx-auto bg-card space-y-6 border border-border p-6 shadow-sm", className)}>
       <div className="flex items-center">
         {isBack && (
-          <Button className="bg-transparent w-fit hover:bg-transparent text-slate-900" onClick={handleOnBack}>
+          <Button className="bg-transparent w-fit hover:bg-transparent text-foreground" onClick={handleOnBack}>
             <ArrowLeft />
           </Button>
         )}

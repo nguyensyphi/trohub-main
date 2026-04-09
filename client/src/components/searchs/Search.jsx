@@ -34,13 +34,13 @@ const Search = () => {
   }
 
   return (
-    <div className="space-y-4 text-sm p-4 bg-black/60 rounded-md">
+    <div className="space-y-4 text-sm p-5 md:p-6 rounded-xl border border-border bg-card shadow-soft">
       <div
         onClick={() => setIsShowProvinceOptions(true)}
-        className="w-full relative flex items-center justify-between bg-secondary gap-3 px-2 py-[6px] border border-input rounded-md"
+        className="w-full relative flex items-center justify-between bg-muted/60 gap-3 px-3 py-2 border border-border rounded-lg"
       >
-        <p className="text-sm flex items-center cursor-pointer gap-2 font-semibold text-slate-900">
-          <SearchIcon color="#222222" size={20} />
+        <p className="text-sm flex items-center cursor-pointer gap-2 font-semibold text-foreground">
+          <SearchIcon className="text-primary shrink-0" size={20} strokeWidth={2} />
           <span>{address.text || "Trên toàn quốc"}</span>
         </p>
         <Button

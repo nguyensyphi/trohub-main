@@ -217,7 +217,7 @@ const ManageOrder = () => {
                             <Eye
                               onClick={() => setShowOrderId(el.id)}
                               size={14}
-                              className="text-blue-500 cursor-pointer"
+                              className="text-primary cursor-pointer"
                             />
                           </DialogTrigger>
 

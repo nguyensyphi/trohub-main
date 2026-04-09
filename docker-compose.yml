@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: phongtroxanh-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-phongtroxanh}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: phongtroxanh-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-5001}:5001"
+    env_file:
+      - .env.docker
+    environment:
+      PORT: ${PORT:-5001}
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-phongtroxanh}
+      DB_USER: ${POSTGRES_USER:-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      DB_DIALECT: postgres
+      DB_SSL: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        VITE_SERVER_URL: ${VITE_SERVER_URL:-http://localhost:5001/api/v1}
+        VITE_CLIENT_GG_ID: ${VITE_CLIENT_GG_ID:-}
+        VITE_DROPBOX_API: ${VITE_DROPBOX_API:-}
+        VITE_EXCHANGERATE_API: ${VITE_EXCHANGERATE_API:-}
+        VITE_PAYPAL_CLIENT_ID: ${VITE_PAYPAL_CLIENT_ID:-}
+        VITE_PRICE_OF_POST_PER_DAY: ${VITE_PRICE_OF_POST_PER_DAY:-}
+    container_name: phongtroxanh-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+    driver: local

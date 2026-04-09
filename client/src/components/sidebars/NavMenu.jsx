@@ -48,7 +48,7 @@ const NavMenu = () => {
                 onClick={() => handleSetActivedTab(el.id)}
                 className="flex hover:bg-slate-200 w-full py-2 px-4 items-center justify-between"
               >
-                <p className={cn("flex items-center gap-2", currentCollapsed === el.id && "text-blue-600")}>
+                <p className={cn("flex items-center gap-2", currentCollapsed === el.id && "text-primary")}>
                   {el.icon} {el.label}
                 </p>
                 {activedTab.some((id) => id === el.id) ? (
@@ -80,7 +80,7 @@ const NavMenu = () => {
               className={({ isActive }) =>
                 cn(
                   "flex items-center hover:bg-slate-200 gap-2 px-4 py-2",
-                  isActive && "bg-slate-200 border-l-4 border-blue-600"
+                  isActive && "bg-muted border-l-4 border-primary"
                 )
               }
               to={"/" + el.path}

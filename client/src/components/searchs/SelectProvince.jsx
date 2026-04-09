@@ -57,7 +57,7 @@ const SelectProvince = ({ onClose, memorizedSetAddress }) => {
                   onClose()
                 }}
                 key={idx}
-                className="text-xs hover:underline cursor-pointer hover:text-blue-600"
+                className="text-xs hover:underline cursor-pointer hover:text-primary"
               >
                 {el.name}
               </p>

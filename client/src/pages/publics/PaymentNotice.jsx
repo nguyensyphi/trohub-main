@@ -11,7 +11,7 @@ const PaymentNotice = () => {
   const { code } = useParams()
   const navigate = useNavigate()
   return (
-    <div className="h-screen bg-slate-100 grid place-content-center">
+    <div className="min-h-screen bg-muted/40 grid place-content-center p-4">
       {code === "00" && (
         <Confetti
           initialVelocityY={{ min: 1, max: 15 }}

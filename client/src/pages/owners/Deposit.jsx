@@ -39,7 +39,7 @@ const Deposit = () => {
     <div className={cn("space-y-4 p-4")}>
       <Section className="w-[700px]" title="Nạp tiền vào tài khoản">
         <div>
-          <p className="p-4 text-sm text-blue-600 bg-blue-50 border border-blue-600 rounded-md w-4/5 mx-auto">
+          <p className="p-4 text-sm text-primary bg-primary/10 border border-primary/40 rounded-lg w-4/5 mx-auto">
             NOTE: Hệ thống hiện đang hỗ trợ duy nhất công thanh toán bằng Paypal, nên sẽ thông qua hoán đổi
             tiền tệ USD-VND theo tỷ lệ được cập nhật mới nhất theo thị trường là 1 USD ={" "}
             <span className="font-bold">{Math.round(rateUsd) || 0}</span> VND

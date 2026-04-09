@@ -32,7 +32,8 @@
     "start": "node index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
-    "mockup": "yarn migrate & yarn seed",
+    "mockup": "npm run migrate && npm run seed",
+    "create-admin": "node scripts/create-admin.js",
     "ap": "npx sequelize db:seed --seed  20240913092035-post.js"
   }
 }

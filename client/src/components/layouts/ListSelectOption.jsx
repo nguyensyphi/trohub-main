@@ -26,7 +26,7 @@ const ListSelectOption = ({ title, options = [], id }) => {
       <div className="grid grid-cols-2 gap-4">
         {options.map((el) => (
           <p
-            className="text-sm border-b border-dashed pb-1 cursor-pointer hover:text-blue-600 border-input"
+            className="text-sm border-b border-dashed pb-1 cursor-pointer hover:text-primary border-input"
             key={el.id}
             onClick={() => handleSearch(el.value, el.label)}
           >

@@ -49,7 +49,7 @@ const Expired = ({ idPost, onCloseDialog, refresh }) => {
       </p>
       <div className="p-4 space-y-4">
         <ConditionRender show={me?.balance === 0}>
-          <p className="text-center px-6 py-2 text-sm bg-blue-100 text-blue-600 border border-blue-500 rounded-md">
+          <p className="text-center px-6 py-2 text-sm bg-primary/10 text-primary border border-primary/30 rounded-lg">
             Số dư trong tài khoản không đủ để thực hiện gia hạn. Bạn hãy nạp tiền trước!
             <span className="italic block">{`(Lưu ý: Giá ${Number(import.meta.env.VITE_PRICE_OF_POST_PER_DAY).toLocaleString()}đ cho 1 ngày)`}</span>
           </p>

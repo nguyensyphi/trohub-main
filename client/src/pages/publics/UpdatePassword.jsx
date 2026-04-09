@@ -81,7 +81,7 @@ const UpdatePassword = ({ email, back }) => {
                     type={isShowPassword ? "text" : "password"}
                   />
                 </FormControl>
-                <div className="absolute -top-1 w-10 h-10 flex text-blue-600 items-center justify-center bg-transparent">
+                <div className="absolute -top-1 w-10 h-10 flex text-primary items-center justify-center bg-transparent">
                   <LockIcon size={16} className="mb-[6px]" />
                 </div>
                 <div
@@ -111,7 +111,7 @@ const UpdatePassword = ({ email, back }) => {
                     className="pl-10"
                   />
                 </FormControl>
-                <div className="absolute -top-1 w-10 h-10 flex text-blue-600 items-center justify-center bg-transparent">
+                <div className="absolute -top-1 w-10 h-10 flex text-primary items-center justify-center bg-transparent">
                   <LockIcon size={16} className="mb-[6px]" />
                 </div>
                 <div

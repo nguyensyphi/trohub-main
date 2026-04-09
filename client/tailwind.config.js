@@ -75,8 +75,12 @@ export default {
       },
     },
     fontFamily: {
+      sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
       bungee: ["Bungee Shade", "sans-serif"],
       quicksand: ["Quicksand", "sans-serif"],
+    },
+    boxShadow: {
+      soft: "0 1px 3px hsl(222 47% 11% / 0.06), 0 8px 24px hsl(222 47% 11% / 0.06)",
     },
   },
   plugins: [require("tailwindcss-animate")],

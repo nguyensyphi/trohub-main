@@ -22,19 +22,19 @@ Tiếp theo, cần tạo một database postgres và đặt tên cho nó. Tên g
 
 Khúc này nếu máy chưa có cài nodejs thì tải và cài trước nhé. Có thể vào terminal và chạy lệnh `node -v` để check xem có node chưa và `npm -v` để check xem có cài `npm` chưa.
 
-Sau khi đã cài nodejs (npm) thì tiền hành cài yarn cho máy. `npm install -g yarn`. Có thể tham khảo hưỡng dẫn trên mạng. Sau khi cài xong kiểm tra xem máy đã có yarn chưa `yarn -v`.
+Sau khi đã cài nodejs (npm) thì có thể dùng luôn npm, không cần cài thêm yarn.
 
 Mở source code lên, **mở terminal đứng tại forder server**.
 
-Trước tiên chạy lệnh `yarn` để tại thư viện cần thiết. Nếu lỗi thì có thể thử `yarn --force`.
+Trước tiên chạy lệnh `npm install` để tải thư viện cần thiết.
 
 Trong forder server, tạo một file mới đặt tên là `.env`, sau đó mở file `.env.example` lên và copy hết trong đó đem qua paste lại vào file `.env`.
 
 Sau đó, điền hết thông tin vào file `.env`.
 
-Tiếp theo, mở terminal forder server chạy server lên bằng lệnh: `yarn dev`.
+Tiếp theo, mở terminal forder server chạy server lên bằng lệnh: `npm run dev`.
 
-Sau khi server chạy lên thành công thì tới bước khởi tạo bảng cho database, và insert dữ liệu `yarn mockup`.
+Sau khi server chạy lên thành công thì tới bước khởi tạo bảng cho database, và insert dữ liệu `npm run mockup`.
 
 Kết thúc chạy thàng công server
 
@@ -42,9 +42,9 @@ Kết thúc chạy thàng công server
 
 Mở source code lên, **mở terminal đứng tại forder client**.
 
-Trước tiên chạy lệnh `yarn` để tại thư viện cần thiết. Nếu lỗi thì có thể thử `yarn --force`.
+Trước tiên chạy lệnh `npm install` để tải thư viện cần thiết.
 
-Tiếp theo, mở terminal forder client chạy server lên bằng lệnh: `yarn dev`.
+Tiếp theo, mở terminal forder client chạy server lên bằng lệnh: `npm run dev`.
 
 Tương tự server, client cũng có file .env, tạo file .evn ở client forder
 
