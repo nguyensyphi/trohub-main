@@ -227,7 +227,7 @@ const CreatePost = () => {
             />
           </Section>
           <Section title="Thông tin phòng trọ">
-            <div className="grid grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
               <CustomInput
                 form={form}
                 id="size"
@@ -235,7 +235,7 @@ const CreatePost = () => {
                 placeholder="Nhập diện tích. VD: 100"
                 isRequired={true}
                 type="number"
-                className="col-span-3"
+                className="col-span-1 md:col-span-3"
               />
               <CustomInput
                 form={form}
@@ -244,7 +244,7 @@ const CreatePost = () => {
                 placeholder="Nhập mức giá. VD: 1000000"
                 isRequired={true}
                 type="number"
-                className="col-span-3"
+                className="col-span-1 md:col-span-3"
               />
               <CustomSelect
                 isRequired={true}
@@ -253,7 +253,7 @@ const CreatePost = () => {
                 options={priorities}
                 label="Gói tin đăng"
                 placeholder="Chọn"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
                 info={
                   <CustomTooltip
                     explain={
@@ -280,14 +280,14 @@ const CreatePost = () => {
                 placeholder="Tối thiệu 3 ngày"
                 isRequired={true}
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomInput
                 form={form}
                 id="total"
                 label="Tổng tiền thanh toán"
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
                 readOnly={true}
                 info={
                   <CustomTooltip explain="Tổng tiền thanh toán = Số tiền gói tin đăng x Số ngày hạn tin đăng">
@@ -296,7 +296,7 @@ const CreatePost = () => {
                 }
               />
               <CustomInput
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
                 form={form}
                 id="bedroom"
                 label="Số phòng ngủ"
@@ -309,7 +309,7 @@ const CreatePost = () => {
                 label="Số phòng tắm"
                 placeholder="VD: 0"
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomSelect
                 isRequired={true}
@@ -318,7 +318,7 @@ const CreatePost = () => {
                 options={genders}
                 label="Đối tượng mong muốn"
                 placeholder="Chọn"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomCheckbox
                 options={convenients.map((el) => ({
@@ -342,7 +342,7 @@ const CreatePost = () => {
             />
           </Section>
           <Section title="Thông tin liên hệ">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <CustomInput
                 form={form}
                 id="fullname"

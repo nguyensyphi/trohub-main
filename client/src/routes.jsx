@@ -1,192 +1,220 @@
+import { lazy, Suspense } from "react"
+import { Loader2 } from "lucide-react"
+
 import App from "./App"
 import pathnames from "./lib/pathnames"
-import { AdminGeneral, AdminLayout, CreateNews, ManageNews, ManagePostAdmin, ManageUser } from "./pages/admin"
-import {
-  BalanceInfo,
-  CreatePost,
-  Deposit,
-  DepositVnpay,
-  ExpiredHistory,
-  General,
-  ManagePost,
-  OwnerLayout,
-  PaymentHistory,
-} from "./pages/owners"
-import ManageOrder from "./pages/owners/ManageOrder"
-import PaymentOnBoarding from "./pages/PaymentOnBoarding"
-import {
-  ChoThueCanHo,
-  ChoThuePhongTro,
-  DetailNews,
-  DetailPost,
-  Homepage,
-  Login,
-  News,
-  NhaChoThue,
-  PaymentNotice,
-  PublicLayout,
-  ResetPassword,
-  SearchLayout,
-  SetupPassword,
-} from "./pages/publics"
-import { ChangeEmail, ChangePhone, Personal, SeenPost, UserLayout, Wishlist } from "./pages/users"
+import { GlobalErrorBoundary } from "./components/ErrorBoundary"
+
+const withSuspense = (Component) => (
+  <Suspense fallback={
+    <div className="w-full flex min-h-screen bg-white bg-opacity-70 flex-col items-center justify-center p-12">
+      <Loader2 className="h-12 w-12 animate-spin text-primary" />
+    </div>
+  }>
+    <Component />
+  </Suspense>
+)
+
+// ========= LAZY LOAD ROUTE COMPONENTS ========= //
+
+/* ADMIN */
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"))
+const AdminGeneral = lazy(() => import("./pages/admin/AdminGeneral"))
+const CreateNews = lazy(() => import("./pages/admin/news/CreateNews"))
+const ManageNews = lazy(() => import("./pages/admin/news/ManageNews"))
+const ManagePostAdmin = lazy(() => import("./pages/admin/ManagePost"))
+const ManageUser = lazy(() => import("./pages/admin/ManageUser"))
+
+/* OWNERS */
+const BalanceInfo = lazy(() => import("./pages/owners/BalanceInfo"))
+const CreatePost = lazy(() => import("./pages/owners/CreatePost"))
+const Deposit = lazy(() => import("./pages/owners/Deposit"))
+const DepositVnpay = lazy(() => import("./pages/owners/DepositVnpay"))
+const ExpiredHistory = lazy(() => import("./pages/owners/ExpiredHistory"))
+const General = lazy(() => import("./pages/owners/General"))
+const ManagePost = lazy(() => import("./pages/owners/ManagePost"))
+const OwnerLayout = lazy(() => import("./pages/owners/OwnerLayout"))
+const PaymentHistory = lazy(() => import("./pages/owners/PaymentHistory"))
+const ManageOrder = lazy(() => import("./pages/owners/ManageOrder"))
+
+/* USERS */
+const ChangeEmail = lazy(() => import("./pages/users/ChangeEmail"))
+const ChangePhone = lazy(() => import("./pages/users/ChangePhone"))
+const Personal = lazy(() => import("./pages/users/Personal"))
+const SeenPost = lazy(() => import("./pages/users/SeenPost"))
+const UserLayout = lazy(() => import("./pages/users/UserLayout"))
+const Wishlist = lazy(() => import("./pages/users/Wishlist"))
+
+/* PUBLICS */
+const ChoThueCanHo = lazy(() => import("./pages/publics/ChoThueCanHo"))
+const ChoThuePhongTro = lazy(() => import("./pages/publics/ChoThuePhongTro"))
+const DetailNews = lazy(() => import("./pages/publics/DetailNews"))
+const DetailPost = lazy(() => import("./pages/publics/DetailPost"))
+const Homepage = lazy(() => import("./pages/publics/Homepage"))
+const Login = lazy(() => import("./pages/publics/Login"))
+const News = lazy(() => import("./pages/publics/News"))
+const NhaChoThue = lazy(() => import("./pages/publics/NhaChoThue"))
+const PaymentNotice = lazy(() => import("./pages/publics/PaymentNotice"))
+const PublicLayout = lazy(() => import("./pages/publics/PublicLayout"))
+const ResetPassword = lazy(() => import("./pages/publics/ResetPassword"))
+const SearchLayout = lazy(() => import("./pages/publics/SearchLayout"))
+const SetupPassword = lazy(() => import("./pages/publics/SetupPassword"))
+
+/* Others */
+const PaymentOnBoarding = lazy(() => import("./pages/PaymentOnBoarding"))
+
 
 const routes = [
   {
     path: "/",
     element: <App />,
+    errorElement: <GlobalErrorBoundary />,
     children: [
       {
         path: pathnames.publics.layout,
-        element: <PublicLayout />,
+        element: withSuspense(PublicLayout),
         children: [
           {
             path: pathnames.publics.homepage,
-            element: <Homepage />,
+            element: withSuspense(Homepage),
           },
           {
             path: pathnames.publics.resetPassword,
-            element: <ResetPassword />,
+            element: withSuspense(ResetPassword),
           },
           {
             path: pathnames.publics.updatePassword,
-            element: <SetupPassword />,
+            element: withSuspense(SetupPassword),
           },
           {
             path: pathnames.publics.news,
-            element: <News />,
+            element: withSuspense(News),
           },
-
           {
             path: pathnames.publics.detailNews__id,
-            element: <DetailNews />,
+            element: withSuspense(DetailNews),
           },
           {
             path: pathnames.publics.search,
-            element: <SearchLayout />,
+            element: withSuspense(SearchLayout),
           },
           {
             path: pathnames.publics.detailPost_idPost,
-            element: <DetailPost />,
+            element: withSuspense(DetailPost),
           },
           {
             path: pathnames.publics.login,
-            element: <Login />,
+            element: withSuspense(Login),
           },
           {
             path: pathnames.publics.chothuecanho,
-            element: <ChoThueCanHo />,
+            element: withSuspense(ChoThueCanHo),
           },
           {
             path: pathnames.publics.chothuephongtro,
-            element: <ChoThuePhongTro />,
+            element: withSuspense(ChoThuePhongTro),
           },
           {
             path: pathnames.publics.nhachothue,
-            element: <NhaChoThue />,
+            element: withSuspense(NhaChoThue),
           },
         ],
       },
       {
         path: pathnames.publics.payment__status,
-        element: <PaymentNotice />,
+        element: withSuspense(PaymentNotice),
       },
       {
         path: pathnames.user.layout,
-        element: <UserLayout />,
+        element: withSuspense(UserLayout),
         children: [
           {
             path: pathnames.user.personal,
-            element: <Personal />,
+            element: withSuspense(Personal),
           },
           {
             path: pathnames.user.changeEmail,
-            element: <ChangeEmail />,
+            element: withSuspense(ChangeEmail),
           },
           {
             path: pathnames.user.changePhone,
-            element: <ChangePhone />,
+            element: withSuspense(ChangePhone),
           },
           {
             path: pathnames.user.seenPost,
-            element: <SeenPost />,
+            element: withSuspense(SeenPost),
           },
           {
             path: pathnames.user.wishlist,
-            element: <Wishlist />,
+            element: withSuspense(Wishlist),
           },
           {
             path: pathnames.user.paymentHistory,
-            element: <PaymentHistory />,
+            element: withSuspense(PaymentHistory),
           },
           {
             path: pathnames.user.expiredHistory,
-            element: <ExpiredHistory />,
+            element: withSuspense(ExpiredHistory),
           },
-          // Paypal
-          // {
-          //   path: pathnames.user.deposit,
-          //   element: <Deposit />,
-          // },
           {
             path: pathnames.user.depositVnpay,
-            element: <DepositVnpay />,
+            element: withSuspense(DepositVnpay),
           },
           {
             path: pathnames.user.balanceInfo,
-            element: <BalanceInfo />,
+            element: withSuspense(BalanceInfo),
           },
         ],
       },
       {
         path: pathnames.owner.layout,
-        element: <OwnerLayout />,
+        element: withSuspense(OwnerLayout),
         children: [
           {
             path: pathnames.owner.general,
-            element: <General />,
+            element: withSuspense(General),
           },
           {
             path: pathnames.owner.createPost,
-            element: <CreatePost />,
+            element: withSuspense(CreatePost),
           },
           {
             path: pathnames.owner.managePost,
-            element: <ManagePost />,
+            element: withSuspense(ManagePost),
           },
           {
             path: pathnames.owner.manageOrder,
-            element: <ManageOrder />,
+            element: withSuspense(ManageOrder),
           },
         ],
       },
       {
         path: pathnames.paymentOnBoarding,
-        element: <PaymentOnBoarding />,
+        element: withSuspense(PaymentOnBoarding),
       },
       {
         path: pathnames.admin.layout,
-        element: <AdminLayout />,
+        element: withSuspense(AdminLayout),
         children: [
           {
             path: pathnames.admin.general,
-            element: <AdminGeneral />,
+            element: withSuspense(AdminGeneral),
           },
           {
             path: pathnames.admin.manageUser,
-            element: <ManageUser />,
+            element: withSuspense(ManageUser),
           },
           {
             path: pathnames.admin.createNews,
-            element: <CreateNews />,
+            element: withSuspense(CreateNews),
           },
           {
             path: pathnames.admin.manageNews,
-            element: <ManageNews />,
+            element: withSuspense(ManageNews),
           },
           {
             path: pathnames.owner.managePost,
-            element: <ManagePostAdmin />,
+            element: withSuspense(ManagePostAdmin),
           },
         ],
       },

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.0",
+    "@hookform/resolvers": "^3.10.0",
     "@paypal/react-paypal-js": "^8.7.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-collapsible": "^1.1.0",
@@ -50,7 +50,7 @@
     "react-confetti": "^6.1.0",
     "react-dom": "^18.3.1",
     "react-dropbox-chooser": "^0.0.5",
-    "react-hook-form": "^7.53.0",
+    "react-hook-form": "^7.72.1",
     "react-leaflet": "^4.2.1",
     "react-quill": "^2.0.0",
     "react-range": "^1.10.0",
@@ -62,7 +62,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "uniqid": "^5.4.0",
-    "zod": "^3.23.8",
+    "zod": "^3.25.76",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

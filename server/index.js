@@ -1,6 +1,14 @@
+process.on("uncaughtException", (err) => {
+  console.error("🔥 UNCAUGHT EXCEPTION! Đang khởi động lại tiến trình...");
+  console.error(err.name, err.message, err.stack);
+  process.exit(1);
+});
+
 require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
+const helmet = require("helmet")
+const morgan = require("morgan")
 const dbconn = require("./configs/dbconn")
 const initRoutes = require("./routes")
 const db = require("./models")
@@ -10,6 +18,9 @@ const { Op } = require("sequelize")
 const moment = require("moment")
 
 const app = express()
+
+app.use(helmet())
+app.use(morgan("combined"))
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -61,3 +72,11 @@ const port = process.env.PORT || 8888
 const listener = app.listen(port, () => {
   console.log(`Server is running on the port ${listener.address().port}`)
 })
+
+process.on("unhandledRejection", (err) => {
+  console.error("🔥 UNHANDLED REJECTION! Lỗi logic không phân giải được. Đang tự động dọn dẹp...");
+  console.error(err.name, err.message, err.stack);
+  listener.close(() => {
+    process.exit(1);
+  });
+});

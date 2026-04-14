@@ -185,7 +185,7 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
             />
           </Section>
           <Section title="Thông tin phòng trọ">
-            <div className="grid grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
               <CustomInput
                 form={form}
                 id="size"
@@ -193,7 +193,7 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
                 placeholder="Nhập diện tích. VD: 100"
                 isRequired={true}
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomInput
                 form={form}
@@ -202,7 +202,7 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
                 placeholder="Nhập mức giá. VD: 1000000"
                 isRequired={true}
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomSelect
                 isRequired={true}
@@ -211,10 +211,10 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
                 options={["Còn trống", "Đã thuê"].map((el) => ({ label: el, value: el }))}
                 label="Trạng thái phòng"
                 placeholder="Chọn"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomInput
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
                 form={form}
                 id="bedroom"
                 label="Số phòng ngủ"
@@ -227,7 +227,7 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
                 label="Số phòng tắm"
                 placeholder="VD: 0"
                 type="number"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomSelect
                 isRequired={true}
@@ -236,7 +236,7 @@ const UpdatePost = ({ post, setEditPost, mutate }) => {
                 options={genders}
                 label="Đối tượng mong muốn"
                 placeholder="Chọn"
-                className="col-span-2"
+                className="col-span-1 md:col-span-2"
               />
               <CustomCheckbox
                 options={convenients.map((el) => ({
