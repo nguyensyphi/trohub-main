@@ -38,25 +38,50 @@ module.exports = {
   publicPost: asyncHandler(async (req, res) => {
     const { id } = req.params
     const { uid } = req.user
-    const { orderedDays, idPost, total } = req.body
-    const payload = { status: "Thành công" }
-    const expiredDate = Date.now() + orderedDays * 24 * 3600 * 1000
+    const { orderedDays, idPost } = req.body
 
-    payload.expiredDate = expiredDate
+    const days = parseInt(orderedDays)
+    if (!days || isNaN(days) || days <= 0) {
+      return res.json({ success: false, msg: "Số ngày đăng hợp lệ là bắt buộc." })
+    }
 
-    // NOTE: Ngày bắt đầu = ngày hết hạn - số ngày đặt
+    const t = await db.sequelize.transaction()
+    try {
+      const post = await db.Post.findOne({ where: { id: idPost, idUser: uid }, transaction: t })
+      if (!post) throw new Error("Không tìm thấy tin đăng phù hợp.")
 
-    const [response, response1] = await Promise.all([
-      db.Order.update(payload, { where: { id } }),
-      db.Post.update({ expiredDate }, { where: { id: idPost } }),
-      db.User.decrement({ balance: total }, { where: { id: uid } }),
-    ])
+      const priorityMap = { 5: 100000, 4: 80000, 3: 60000, 2: 40000, 1: 20000, 0: 10000 }
+      const pricePerDay = priorityMap[post.priority] || 10000
+      const totalAmount = pricePerDay * days
 
-    const isSuccess = response[0] > 0 && response1[0] > 0
-    return res.json({
-      success: isSuccess,
-      msg: isSuccess ? "Tin đăng đã được công khai." : "Có lỗi hãy thử lại sau.",
-    })
+      const user = await db.User.findByPk(uid, { transaction: t })
+      if (!user || user.balance < totalAmount) {
+        throw new Error("Số dư tài khoản không đủ để thanh toán.")
+      }
+
+      const expiredDate = Date.now() + days * 24 * 3600 * 1000
+
+      await db.Order.update(
+        { status: "Thành công", expiredDate },
+        { where: { id, idUser: uid }, transaction: t }
+      )
+      
+      await db.Post.update({ expiredDate }, { where: { id: idPost }, transaction: t })
+      await db.User.decrement({ balance: totalAmount }, { where: { id: uid }, transaction: t })
+
+      await t.commit()
+
+      return res.json({
+        success: true,
+        msg: "Tin đăng đã được công khai thành công.",
+      })
+    } catch (error) {
+      await t.rollback()
+      return res.json({
+        success: false,
+        msg: error.message || "Có lỗi hãy thử lại sau.",
+      })
+    }
   }),
   removeOrder: asyncHandler(async (req, res) => {
     const { uid } = req.user

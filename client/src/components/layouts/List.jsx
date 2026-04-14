@@ -5,6 +5,7 @@ import PostCard from "./PostCard"
 import { Pagination } from "../paginations"
 import { useSearchStore } from "@/zustand/useSearchStore"
 import PropTypes from "prop-types"
+import { Loader2 } from "lucide-react"
 
 const options = {
   revalidateOnFocus: false, // Không re-fetch khi mất focus
@@ -20,7 +21,7 @@ const List = ({ setAddressArr, postType }) => {
   const location = useLocation()
   const { currentSearchParams, setCurrentSearchParams, resetSearchStore } = useSearchStore()
   // const data = { data: [], status: 0 }
-  const { data } = useGetPublicPosts(searchParams, options)
+  const { data, isLoading } = useGetPublicPosts(searchParams, options)
 
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams.toString())
@@ -97,7 +98,12 @@ const List = ({ setAddressArr, postType }) => {
         </div>
       )}
       <div className="grid grid-cols-1 gap-4">
-        {data?.posts && data.posts?.length > 0 ? (
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center p-12">
+            <Loader2 className="h-10 w-10 animate-spin text-primary" />
+            <p className="mt-4 text-sm text-muted-foreground animate-pulse">Đang tải dữ liệu, vui lòng chờ...</p>
+          </div>
+        ) : data?.posts && data.posts?.length > 0 ? (
           data.posts.map((el) => (
             <PostCard
               key={el.id}
@@ -118,7 +124,9 @@ const List = ({ setAddressArr, postType }) => {
             />
           ))
         ) : (
-          <p className="text-sm">Không có dữ liệu phù hợp...</p>
+          <div className="p-8 text-center text-muted-foreground">
+            <p className="text-sm">Không có dữ liệu phù hợp...</p>
+          </div>
         )}
       </div>
       {data?.pagination && <Pagination {...data.pagination} />}

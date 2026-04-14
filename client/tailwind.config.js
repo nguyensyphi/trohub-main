@@ -52,7 +52,7 @@ export default {
         },
       },
       width: {
-        main: "1100px",
+        main: "min(1100px, 100%)",
       },
       keyframes: {
         blink: {
