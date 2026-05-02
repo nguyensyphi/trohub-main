@@ -63,9 +63,12 @@ const Login = () => {
   }, [isRegister, activedTab])
 
   const onSubmit = async (data) => {
-    const { isRemember, ...payload } = data
     let response
     if (isRegister) {
+      const payload = activedTab === "email" 
+          ? { email: data.email, password: data.password, fullname: data.fullname }
+          : { phone: data.phone, password: data.password, fullname: data.fullname }
+      
       response =
         activedTab === "email" ? await apiRegisterWithEmail(payload) : await apiRegisterWithPhone(payload)
       if (response.data.success) {
@@ -73,6 +76,10 @@ const Login = () => {
         setIsRegister(false)
       } else toast.error(response.data.msg)
     } else {
+      const payload = activedTab === "email"
+          ? { email: data.email, password: data.password }
+          : { phone: data.phone, password: data.password }
+          
       response = activedTab === "email" ? await apiLoginWithEmail(payload) : await apiLoginWithPhone(payload)
       if (response.data.success) {
         toast.success(response.data.msg)

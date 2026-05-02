@@ -45,13 +45,6 @@ export const apiUserDeposit = (data) =>
     data,
   })
 
-export const apiDepositMoney = (data) =>
-  axios({
-    method: "post",
-    url: endpoints.payment.depositVnpay,
-    data,
-  })
-
 export const apiDepositMomo = (data) =>
   axios({
     method: "post",

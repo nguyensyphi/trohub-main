@@ -13,6 +13,7 @@ const dbconn = require("./configs/dbconn")
 const initRoutes = require("./routes")
 const db = require("./models")
 const cron = require("node-cron")
+const { syncVNExpressNews } = require("./utils/syncRSSNews")
 const { readHtmlTemplateExpired, sendMail } = require("./utils/helpers")
 const { Op } = require("sequelize")
 const moment = require("moment")
@@ -84,6 +85,18 @@ cron.schedule("16 20 * * *", async () => {
 
   console.log("Đã quét xong")
 })
+
+// Auto sync real estate news every 6 hours
+cron.schedule("0 */6 * * *", () => {
+  console.log("Tiến hành đồng bộ tin tức ngầm...")
+  syncVNExpressNews()
+})
+
+// Run once 3 seconds after server starts to test
+setTimeout(() => {
+  syncVNExpressNews()
+}, 3000)
+
 
 const port = process.env.PORT || 8888
 const listener = app.listen(port, () => {

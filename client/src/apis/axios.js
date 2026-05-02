@@ -73,10 +73,8 @@ export const endpoints = {
   },
   app: {
     allProvinces: "https://vietnam-administrative-division-json-server-swart.vercel.app/province",
-    districtsByProvinceId:
-      "https://vietnam-administrative-division-json-server-swart.vercel.app/district/?idProvince=",
-    wardsByDistrictId:
-      "https://vietnam-administrative-division-json-server-swart.vercel.app/commune/?idDistrict=",
+    districtsByProvinceId: "https://esgoo.net/api-tinhthanh/2/",
+    wardsByDistrictId: "https://esgoo.net/api-tinhthanh/3/",
     locations: "https://nominatim.openstreetmap.org/search?format=json&q=",
     exchangeRate: `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGERATE_API}/latest/USD`,
   },
@@ -91,7 +89,7 @@ export const endpoints = {
     commentPost: "/post/comment-new/",
   },
   payment: {
-    depositVnpay: "/payment/deposit",
+
     depositMomo: "/payment/deposit-momo",
     depositQR: "/payment/create-order",
   },

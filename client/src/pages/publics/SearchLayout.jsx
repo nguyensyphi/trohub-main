@@ -53,27 +53,51 @@ const SearchLayout = () => {
   }, [gender, bedroom, bathroom, searchParams, location.pathname, debounceTitle])
 
   useEffect(() => {
-    const fetchLocations = async () => {
-      const promise = addressArr.map((el) => apiGetLocationsFromSearchTerm(el))
-      const response = await Promise.all(promise)
-      let newLocations = []
-      response.forEach((el) => {
-        if (el.status === 200) {
-          const dataFormat = el.data
-            ?.filter((_, idx) => idx === 0)
-            ?.map((i) => ({
-              longitude: +i.lon,
-              latitude: +i.lat,
-              displayName: i.display_name,
-            }))
-          newLocations = [...newLocations, ...dataFormat]
+    const getSingleLocation = async (addressTxt) => {
+      const parts = addressTxt.split(",").map((el) => el.trim()).filter(Boolean)
+      
+      while (parts.length > 0) {
+        const query = parts.join(", ")
+        try {
+          const res = await apiGetLocationsFromSearchTerm(`${query}, Vietnam`)
+          if (res.status === 200 && res.data?.length > 0) {
+            return {
+              longitude: +res.data[0].lon,
+              latitude: +res.data[0].lat,
+              displayName: res.data[0].display_name,
+            }
+          }
+        } catch (error) {
+          console.error(`Lỗi lấy toạ độ cho ${query}`, error)
         }
-      })
-      setLocations(newLocations)
+        // Xoá địa chỉ chi tiết nhất nếu không tìm thấy (nhà/xóm, phường/xã, ...)
+        parts.shift()
+      }
+      return null
     }
-    if (addressArr && addressArr.length > 0) fetchLocations()
+
+    const fetchLocations = async () => {
+      const queries = [...addressArr]
+      if (address && !queries.includes(address)) {
+        queries.unshift(address)
+      }
+      
+      const validLocations = []
+      for (let i = 0; i < queries.length; i++) {
+        const loc = await getSingleLocation(queries[i])
+        if (loc) validLocations.push(loc)
+        
+        // Delay 1s giữa các request để tuân thủ luật của OpenStreetMap Nominatim (Tránh bị chặn IP - HTTP 403/429)
+        if (i < queries.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1000))
+        }
+      }
+      
+      setLocations(validLocations)
+    }
+    if ((addressArr && addressArr.length > 0) || address) fetchLocations()
     else setLocations([])
-  }, [addressArr])
+  }, [addressArr, address])
 
   // console.log(form.getValues())
 

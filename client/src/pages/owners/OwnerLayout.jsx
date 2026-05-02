@@ -8,8 +8,8 @@ import { toast } from "sonner"
 const OwnerLayout = () => {
   const { me } = useMeStore()
   if (!me || me.role === "Thành viên") {
-    toast.warning("Không có quyền truy cập.")
-    return <Navigate to={"/" + pathnames.publics.login} replace={true} />
+    toast.warning("Hãy nâng cấp lên Chủ trọ để được đăng tin!")
+    return <Navigate to={"/"} replace={true} />
   }
   return (
     <div className="bg-muted/50 flex h-screen flex-col">

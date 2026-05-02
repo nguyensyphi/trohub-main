@@ -14,6 +14,8 @@ import {
 import { adminMenu, ownerMenu, userMenu } from "@/lib/constant"
 import { useEffect, useState } from "react"
 
+import { toast } from "sonner"
+
 const Header = () => {
   const navigate = useNavigate()
   const { me, logout } = useMeStore()
@@ -91,7 +93,13 @@ const Header = () => {
             </NavigationMenu>
           )}
           <Button
-            onClick={() => navigate("/" + pathnames.owner.layout + pathnames.owner.createPost)}
+            onClick={() => {
+              if (me?.role === "Thành viên") {
+                toast.warning("Hãy nâng cấp lên Chủ trọ để được đăng tin!")
+                return
+              }
+              navigate("/" + pathnames.owner.layout + pathnames.owner.createPost)
+            }}
             variant="outline"
           >
             <span>Đăng tin mới</span>

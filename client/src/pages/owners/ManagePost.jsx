@@ -80,13 +80,20 @@ const MagagePost = () => {
     }
 
     // Set roomStatus
-    if (statuses.length > 0) {
+    if (roomStatus.length > 0) {
       newParams.delete("roomStatus")
-      statuses.forEach((el) => {
+      roomStatus.forEach((el) => {
         newParams.append("roomStatus", el.value)
       })
     } else {
       newParams.delete("roomStatus")
+    }
+
+    // Set expiredStatus
+    if (expiredStatus && expiredStatus !== "Tất cả") {
+      newParams.set("expiredStatus", expiredStatus)
+    } else {
+      newParams.delete("expiredStatus")
     }
 
     // Set sort
@@ -106,7 +113,7 @@ const MagagePost = () => {
       search: newParams.toString(),
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceTitleTerm, propertyTypes, location.pathname, statuses, sort])
+  }, [debounceTitleTerm, propertyTypes, location.pathname, statuses, sort, roomStatus, expiredStatus])
 
   // Set values cho cards
   useEffect(() => {
@@ -154,7 +161,7 @@ const MagagePost = () => {
   }
 
   const handleOnChangeRoomStatus = (option) => {
-    const hasOption = statuses.some((el) => el.value === option.value)
+    const hasOption = roomStatus.some((el) => el.value === option.value)
     if (hasOption) setRoomStatus((prev) => prev.filter((el) => el.value !== option.value))
     else setRoomStatus((prev) => [...prev, option])
   }
@@ -176,6 +183,7 @@ const MagagePost = () => {
     setPropertyTypes([])
     setStatuses([])
     setRoomStatus([])
+    setExpiredStatus("Tất cả")
     setSort("createdAt,desc")
     navigate({
       pathname: location.pathname,
@@ -225,7 +233,7 @@ const MagagePost = () => {
               placeholder="Tìm kiếm tin đăng"
               value={titleTerm}
               onChange={(e) => setTitleTerm(e.target.value)}
-              className='"border placeholder:text-slate-300 px-3 rounded-md h-8 w-fit'
+              className="border placeholder:text-slate-300 px-3 rounded-md h-8 w-60"
             />
             <div className="flex items-center gap-2">
               <label htmlFor="sort" className="text-sm font-medium leading-none">
@@ -292,7 +300,7 @@ const MagagePost = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data?.posts &&
             data.posts?.length > 0 &&
             data.posts.map((el, idx) => (

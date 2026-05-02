@@ -29,7 +29,7 @@ const ManageUser = lazy(() => import("./pages/admin/ManageUser"))
 const BalanceInfo = lazy(() => import("./pages/owners/BalanceInfo"))
 const CreatePost = lazy(() => import("./pages/owners/CreatePost"))
 const Deposit = lazy(() => import("./pages/owners/Deposit"))
-const DepositVnpay = lazy(() => import("./pages/owners/DepositVnpay"))
+const DepositMomo = lazy(() => import("./pages/owners/DepositMomo"))
 const ExpiredHistory = lazy(() => import("./pages/owners/ExpiredHistory"))
 const General = lazy(() => import("./pages/owners/General"))
 const ManagePost = lazy(() => import("./pages/owners/ManagePost"))
@@ -157,8 +157,8 @@ const routes = [
             element: withSuspense(ExpiredHistory),
           },
           {
-            path: pathnames.user.depositVnpay,
-            element: withSuspense(DepositVnpay),
+            path: pathnames.user.depositMomo,
+            element: withSuspense(DepositMomo),
           },
           {
             path: pathnames.user.balanceInfo,

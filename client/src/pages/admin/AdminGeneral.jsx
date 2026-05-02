@@ -110,85 +110,91 @@ const AdminGeneral = () => {
     <section className={cn("space-y-4 p-4")}>
       <Section title="Tổng quan">
         <div className="py-4">
-          <div className="grid grid-cols-4 gap-4">
-            <div className="col-span-1 bg-primary p-4 border border-primary/20 rounded-xl flex items-center justify-between gap-4 shadow-sm">
-              <span className="text-3xl font-bold text-slate-50">{data?.createdUser}</span>
-              <span className="flex text-white flex-col gap-2 items-end">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-primary p-4 border border-primary/20 rounded-xl flex items-center justify-between gap-2 shadow-sm overflow-hidden">
+              <span className="text-2xl lg:text-3xl font-bold text-slate-50 truncate" title={data?.createdUser}>
+                {data?.createdUser}
+              </span>
+              <span className="flex text-white flex-col gap-1 items-end shrink-0">
                 <span>
                   <User2 className="text-white" size={20} />
                 </span>
-                <span>Thành viên mới</span>
+                <span className="text-sm whitespace-nowrap">Thành viên mới</span>
               </span>
             </div>
-            <div className="col-span-1 bg-chart-5/90 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm">
-              <span className="text-3xl font-bold text-slate-50">{shortNumber(+data?.totalIncomes)}</span>
-              <span className="flex text-white flex-col gap-2 items-end">
+            <div className="bg-chart-5/90 p-4 border border-border rounded-xl flex items-center justify-between gap-2 shadow-sm overflow-hidden">
+              <span className="text-2xl lg:text-3xl font-bold text-slate-50 truncate" title={shortNumber(+data?.totalIncomes)}>
+                {shortNumber(+data?.totalIncomes)}
+              </span>
+              <span className="flex text-white flex-col gap-1 items-end shrink-0">
                 <span>
                   <Wallet size={20} />
                 </span>
-                <span>Thu nhập</span>
+                <span className="text-sm whitespace-nowrap">Thu nhập</span>
               </span>
             </div>
-            <div className="col-span-1 bg-chart-1 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm">
-              <span className="text-3xl font-bold text-slate-50">
+            <div className="bg-chart-1 p-4 border border-border rounded-xl flex items-center justify-between gap-2 shadow-sm overflow-hidden">
+              <span className="text-2xl lg:text-3xl font-bold text-slate-50 truncate">
                 {data?.posts?.reduce((sum, el) => sum + Number(el.createdPost), 0)}
               </span>
-              <span className="flex text-slate-50 flex-col gap-2 items-end">
+              <span className="flex text-slate-50 flex-col gap-1 items-end shrink-0">
                 <span>
-                  <List size={24} />
+                  <List size={20} />
                 </span>
-                <span>Bài đăng mới</span>
+                <span className="text-sm whitespace-nowrap">Bài đăng mới</span>
               </span>
             </div>
-            <div className="col-span-1 bg-chart-4 p-4 border border-border rounded-xl flex items-center justify-between gap-4 shadow-sm text-slate-900">
-              <span className="text-3xl font-bold">{data?.anonymous + data?.registed}</span>
-              <span className="flex flex-col gap-2 items-end opacity-90">
+            <div className="bg-chart-4 p-4 border border-border rounded-xl flex items-center justify-between gap-2 shadow-sm text-slate-900 overflow-hidden">
+              <span className="text-2xl lg:text-3xl font-bold truncate">
+                {data?.anonymous + data?.registed}
+              </span>
+              <span className="flex flex-col gap-1 items-end opacity-90 shrink-0">
                 <span>
                   <EyeIcon size={20} />
                 </span>
-                <span>Lượt truy cập</span>
+                <span className="text-sm whitespace-nowrap">Lượt truy cập</span>
               </span>
             </div>
           </div>
         </div>
-        <div className="mt-6 px-4 grid grid-cols-10 gap-4">
-          <div className="col-span-7 h-fit border border-border flex flex-col gap-4 relative rounded-xl flex-auto p-4 bg-card shadow-sm">
-            <span className="font-bold">{`Số tin đăng mới thống kê theo ${isMonth ? "tháng" : "ngày"}`}</span>
-            <div className="flex items-center justify-between">
-              <span className="font-bold flex items-center gap-8">
-                <div className="flex items-center font-thin gap-8">
-                  <span className="flex items-center gap-2">
-                    <label htmlFor="from">Từ</label>
-                    <input
-                      type="date"
-                      value={customTime.from}
-                      onChange={(e) => setCustomTime((prev) => ({ ...prev, from: e.target.value }))}
-                      id="from"
-                    />
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <label htmlFor="from">Đến</label>
-                    <input
-                      type="date"
-                      value={customTime.to}
-                      onChange={(e) => setCustomTime((prev) => ({ ...prev, to: e.target.value }))}
-                      id="to"
-                    />
-                  </span>
-                  <button
-                    type="button"
-                    className="px-4 py-2 rounded-md border border-primary text-primary"
-                    onClick={handleCustomTime}
-                  >
-                    Default
-                  </button>
-                </div>
-              </span>
-              <span className="flex items-center">
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-10 gap-4">
+          <div className="lg:col-span-7 h-fit border border-border flex flex-col gap-4 relative rounded-xl p-4 bg-card shadow-sm overflow-hidden auto-cols-min">
+            <span className="font-bold">{`Tin đăng mới theo ${isMonth ? "tháng" : "ngày"}`}</span>
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
+                <span className="flex items-center gap-2">
+                  <label htmlFor="from" className="text-sm font-medium whitespace-nowrap">Từ</label>
+                  <input
+                    type="date"
+                    value={customTime.from}
+                    onChange={(e) => setCustomTime((prev) => ({ ...prev, from: e.target.value }))}
+                    id="from"
+                    className="text-sm border p-1.5 rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </span>
+                <span className="flex items-center gap-2">
+                  <label htmlFor="to" className="text-sm font-medium whitespace-nowrap">Đến</label>
+                  <input
+                    type="date"
+                    value={customTime.to}
+                    onChange={(e) => setCustomTime((prev) => ({ ...prev, to: e.target.value }))}
+                    id="to"
+                    className="text-sm border p-1.5 rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </span>
                 <button
                   type="button"
-                  className={`px-4 py-2 rounded-md border ${
-                    isMonth ? "" : "text-white font-semibold bg-primary"
+                  className="px-3 py-1.5 text-sm rounded-md border border-primary text-primary whitespace-nowrap hover:bg-primary/5"
+                  onClick={handleCustomTime}
+                >
+                  Xóa lọc
+                </button>
+              </div>
+              <div className="flex items-center shrink-0">
+                <button
+                  type="button"
+                  className={`px-4 py-1.5 text-sm border rounded-l-md ${
+                    isMonth ? "bg-card text-foreground" : "text-white font-semibold bg-primary"
                   }`}
                   onClick={() => setIsMonth(false)}
                 >
@@ -196,44 +202,46 @@ const AdminGeneral = () => {
                 </button>
                 <button
                   type="button"
-                  className={`px-4 py-2 rounded-md border ${
-                    isMonth ? "text-white font-semibold bg-primary" : ""
+                  className={`px-4 py-1.5 text-sm border border-l-0 rounded-r-md ${
+                    isMonth ? "text-white font-semibold bg-primary" : "bg-card text-foreground"
                   }`}
                   onClick={() => setIsMonth(true)}
                 >
                   Tháng
                 </button>
-              </span>
+              </div>
             </div>
             {chartData ? (
-              <div className="chart-container">
-                <Line
-                  options={options}
-                  data={{
-                    labels: chartData?.map((el) => el.date),
-                    datasets: [
-                      {
-                        data: chartData?.map((el) => +el.createdPost),
-                        borderColor: "#e35050",
-                        tension: 0.2,
-                        borderWidth: 2,
-                        pointBackgroundColor: "white",
-                        pointHoverRadius: 4,
-                        pointBorderColor: "#e35050",
-                        pointHoverBorderWidth: 4,
-                      },
-                    ],
-                  }}
-                />
+              <div className="chart-container overflow-x-auto w-full">
+                <div className="min-w-[500px]">
+                  <Line
+                    options={options}
+                    data={{
+                      labels: chartData?.map((el) => el.date),
+                      datasets: [
+                        {
+                          data: chartData?.map((el) => +el.createdPost),
+                          borderColor: "#e35050",
+                          tension: 0.2,
+                          borderWidth: 2,
+                          pointBackgroundColor: "white",
+                          pointHoverRadius: 4,
+                          pointBorderColor: "#e35050",
+                          pointHoverBorderWidth: 4,
+                        },
+                      ],
+                    }}
+                  />
+                </div>
               </div>
             ) : (
-              <span>Không có tin đăng nào.</span>
+              <span className="text-sm text-foreground/70">Không có tin đăng nào.</span>
             )}
           </div>
-          <div className="col-span-3 rounded-md border p-4">
-            <span className="font-bold gap-8">Số người truy cập chưa đăng ký và đã đăng ký</span>
-            <div>
-              <Pie data={pieData} />;
+          <div className="lg:col-span-3 rounded-xl border p-4 bg-card shadow-sm flex flex-col justify-center items-center">
+            <span className="font-bold text-center mb-4 leading-tight">Thống kê lượt truy cập</span>
+            <div className="w-[80%] max-w-[250px]">
+              <Pie data={pieData} />
             </div>
           </div>
         </div>

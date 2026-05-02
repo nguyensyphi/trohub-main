@@ -9,7 +9,7 @@ const Wishlist = () => {
   return (
     <div className={cn("space-y-4 h-full p-4")}>
       <Section title="Tin đăng yêu thích">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data?.wls?.map((el) => (
             <PostCard
               key={el.id}

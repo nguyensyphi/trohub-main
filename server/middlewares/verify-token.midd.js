@@ -50,7 +50,7 @@ const isAdmin = async (req, res, next) => {
 const isOwner = async (req, res, next) => {
   const { uid } = req.user
   const user = await db.User.findByPk(uid)
-  if (!user || user.role !== "Chủ trọ")
+  if (!user || (user.role !== "Chủ trọ" && user.role !== "Quản trị viên"))
     return res.json({
       success: false,
       msg: "Không có quyền truy cập",

@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.ENUM,
         values: roles,
+        defaultValue: "Thành viên",
       },
       fullname: DataTypes.STRING,
       phoneVerified: DataTypes.BOOLEAN,

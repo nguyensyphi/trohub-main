@@ -21,7 +21,7 @@ const BalanceInfo = () => {
             trong tài khoản.
           </p>
           <Button onClick={(e) => e.stopPropagation()}>
-            <Link to={"/" + pathnames.user.layout + pathnames.user.depositVnpay}>Đi tới nạp tiền</Link>
+            <Link to={"/" + pathnames.user.layout + pathnames.user.depositMomo}>Đi tới nạp tiền</Link>
           </Button>
         </div>
       </Section>

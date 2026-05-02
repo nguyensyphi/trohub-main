@@ -558,7 +558,7 @@ Backend TroHub theo mô hình **MVC** (biến thể):
         │                  │                  │
         ▼                  ▼                  ▼
 ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│  Google OAuth  │ │   VNPay API   │ │   MoMo API    │
+│  Google OAuth  │ │   Momo API    │ │   MoMo API    │
 │  (Đăng nhập)   │ │  (Thanh toán)  │ │  (Thanh toán)  │
 └───────────────┘ └───────────────┘ └───────────────┘
         │                  │                  │

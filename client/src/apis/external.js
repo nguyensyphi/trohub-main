@@ -29,12 +29,12 @@ export const useGetAllProvinces = (options) => {
 export const apiGetDistrictsByProvinceId = (id) =>
   axios({
     method: "get",
-    url: endpoints.app.districtsByProvinceId + id,
+    url: endpoints.app.districtsByProvinceId + id + ".htm",
   })
 export const apiGetWardsByDistrictId = (id) =>
   axios({
     method: "get",
-    url: endpoints.app.wardsByDistrictId + id,
+    url: endpoints.app.wardsByDistrictId + id + ".htm",
   })
 export const apiGetLocationsFromSearchTerm = (searchTerm) =>
   axios({

@@ -171,9 +171,9 @@ const ManageUser = () => {
       <Section title="Quản lý thành viên">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center flex-wrap gap-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <Checkbox checked={selectAll} id="terms" onCheckedChange={handleSelectAll} />
-              <label htmlFor="terms" className="text-sm font-medium leading-none">
+              <label htmlFor="terms" className="text-sm font-medium leading-none whitespace-nowrap">
                 Chọn tất cả
               </label>
             </div>
@@ -182,13 +182,13 @@ const ManageUser = () => {
                 onClick={removeUsers}
                 variant="filled"
                 size="sm"
-              >{`Xóa ${checkSelectedCards()} tin`}</Button>
+              >{`Xóa ${checkSelectedCards()} tài khoản`}</Button>
             )}
             <Input
               placeholder="Tìm kiếm thành viên"
               value={titleTerm}
               onChange={(e) => setTitleTerm(e.target.value)}
-              className='"border placeholder:text-slate-300 px-3 rounded-md h-8 w-fit'
+              className="border placeholder:text-slate-300 px-3 rounded-md h-8 w-64"
             />
 
             {handleCheckSearchParams() && (
@@ -198,8 +198,8 @@ const ManageUser = () => {
               </Button>
             )}
           </div>
-          <div className="flex items-center gap-2">
-            <label htmlFor="sort" className="text-sm font-medium leading-none">
+          <div className="flex items-center gap-2 shrink-0">
+            <label htmlFor="sort" className="text-sm font-medium leading-none whitespace-nowrap">
               Sắp xếp:
             </label>
             <Select defaultValue="createdAt,desc" value={sort} onValueChange={setSort}>
@@ -218,7 +218,7 @@ const ManageUser = () => {
             </Select>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data?.users &&
             data.users?.length > 0 &&
             data.users.map((el, idx) => (
@@ -282,23 +282,27 @@ const ManageUser = () => {
                       </DropdownMenuGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <p className="font-bold">{el.fullname}</p>
-                  <p className="flex items-center gap-2 line-clamp-1">
-                    {el.email ?? "Email chưa cập nhật"}
+                  <p className="font-bold truncate" title={el.fullname}>{el.fullname}</p>
+                  <div className="flex items-center gap-2 w-full mt-1">
+                    <span className="truncate flex-1 min-w-0" title={el.email ?? "Email chưa cập nhật"}>
+                      {el.email ?? "Email chưa cập nhật"}
+                    </span>
                     {el.emailVerified ? (
-                      <BadgeCheck className="text-green-500" size={16} />
+                      <BadgeCheck className="text-green-500 shrink-0" size={16} />
                     ) : (
-                      <TriangleAlert size={16} className="text-red-500" />
+                      <TriangleAlert size={16} className="text-red-500 shrink-0" />
                     )}
-                  </p>
-                  <p className="flex text-sm items-center gap-2 line-clamp-1">
-                    {el.phone ?? "SĐT chưa cập nhật"}
+                  </div>
+                  <div className="flex text-sm items-center gap-2 mt-1 w-full">
+                    <span className="truncate flex-1 min-w-0" title={el.phone ?? "SĐT chưa cập nhật"}>
+                      {el.phone ?? "SĐT chưa cập nhật"}
+                    </span>
                     {el.phoneVerified ? (
-                      <BadgeCheck className="text-green-500" size={16} />
+                      <BadgeCheck className="text-green-500 shrink-0" size={16} />
                     ) : (
-                      <TriangleAlert size={16} className="text-red-500" />
+                      <TriangleAlert size={16} className="text-red-500 shrink-0" />
                     )}
-                  </p>
+                  </div>
                   <div className="text-sm flex items-center gap-2 text-main">
                     <span>Vai trò: </span>
                     {editUser?.id !== el.id ? el.role : ""}

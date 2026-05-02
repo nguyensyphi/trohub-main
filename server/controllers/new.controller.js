@@ -17,10 +17,8 @@ module.exports = {
     })
   }),
   getNewsAdmin: asyncHandler(async (req, res) => {
-    const { uid } = req.user
-    const { limit = 5, sort = "createdAt", order = "DESC", page = 1, title, ...rest } = req.query
-    const whereClause = rest
-    whereClause.idUser = uid
+    const { limit = 5, sort = "createdAt", order = "DESC", page = 1, title } = req.query
+    const whereClause = {}
 
     const sortBy = [[sort, order.toUpperCase()]]
     if (title) {
@@ -30,7 +28,7 @@ module.exports = {
     const offset = (parseInt(page) - 1) * parseInt(limit)
     const response = await db.New.findAll({
       where: whereClause,
-      include: [{ model: db.User, as: "postedBy", attibutes: ["id", "fullname", "avatar"] }],
+      include: [{ model: db.User, as: "postedBy", attributes: ["id", "fullname", "avatar"] }],
       limit,
       offset,
       order: sortBy,

@@ -8,7 +8,7 @@ const SeenPost = () => {
   return (
     <div className={cn("space-y-4 p-4")}>
       <Section title="Tin đăng đã xem">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data?.seenPosts?.map((el) => (
             <PostCard
               key={el.id}

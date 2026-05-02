@@ -106,7 +106,7 @@ const PopoverRange = ({ id, label, _id, options = [], maxValue = 0, exp = 1, uni
       <PopoverTrigger
         ref={parentSidebarRef}
         className={cn(
-          "rounded-md px-2 py-[6px] w-full text-secondary text-sm font-semibold border border-input",
+          "rounded-md px-2 py-[6px] w-full text-foreground text-sm font-semibold border border-input",
           className
         )}
       >

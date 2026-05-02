@@ -37,13 +37,6 @@ module.exports = {
     const { phone } = req.body
     const { uid } = req.user
 
-    if (!client || !serviceSid) {
-      return res.json({
-        success: false,
-        msg: "Dịch vụ OTP tạm thời không khả dụng.",
-      })
-    }
-
     // KT SĐT đã sử dụng
     const user = await db.User.findOne({ where: { phone } })
     if (user && +user.id !== +uid)
@@ -51,6 +44,13 @@ module.exports = {
         success: false,
         msg: "Số điện thoại đã được đăng ký.",
       })
+
+    if (!client || !serviceSid) {
+      return res.json({
+        success: true,
+        msg: "(Sandbox) Mã OTP mô phỏng đã gửi. Hãy điền 123456",
+      })
+    }
     await client.verify.v2
       .services(serviceSid)
       .verifications.create({ to: phone, channel: "sms" })
@@ -72,14 +72,24 @@ module.exports = {
     const { uid } = req.user
     const { phone, code } = req.body
 
+    const formattedPhone = phone.replace("+84", "0")
+
     if (!client || !serviceSid) {
+      if (code === "123456") {
+        const updatedUser = await db.User.update(
+          { phone: formattedPhone, phoneVerified: true },
+          { where: { id: uid } }
+        )
+        return res.json({
+          success: updatedUser[0] > 0,
+          msg: updatedUser[0] > 0 ? "Xác minh điện thoại thành công." : "Xác minh điện thoại không thành công.",
+        })
+      }
       return res.json({
         success: false,
-        msg: "Dịch vụ OTP tạm thời không khả dụng.",
+        msg: "Mã OTP không chính xác.",
       })
     }
-
-    const formattedPhone = phone.replace("+84", "0")
 
     await client.verify.v2
       .services(serviceSid)

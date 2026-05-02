@@ -1,11 +1,21 @@
-import { MapContainer as MapWrapper, TileLayer, Marker, Popup } from "react-leaflet"
+import { MapContainer as MapWrapper, TileLayer, Marker, Popup, useMap } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png"
 import markerIcon from "leaflet/dist/images/marker-icon.png"
 import markerShadow from "leaflet/dist/images/marker-shadow.png"
 import PropTypes from "prop-types"
-import { memo } from "react"
+import { memo, useEffect } from "react"
+
+const MapUpdater = ({ center, zoom }) => {
+  const map = useMap()
+  useEffect(() => {
+    if (center[0] && center[1]) {
+      map.flyTo(center, zoom, { duration: 1.5 })
+    }
+  }, [center[0], center[1], zoom, map])
+  return null
+}
 
 // Fix the default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl
@@ -24,6 +34,7 @@ const MapContainer = ({ locations = [], zoom = 12 }) => {
           zoom={zoom}
           style={{ height: "100%", width: "100%", zIndex: 0 }}
         >
+          <MapUpdater center={[locations[0].latitude, locations[0].longitude]} zoom={zoom} />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

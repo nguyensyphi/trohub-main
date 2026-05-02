@@ -87,8 +87,8 @@ export const userMenu = [
       },
       {
         id: 44,
-        label: "Nạp tiền",
-        path: pathnames.user.layout + pathnames.user.depositVnpay,
+        label: "Nạp tiền MoMo",
+        path: pathnames.user.layout + pathnames.user.depositMomo,
       },
       // {
       //   id: 45,

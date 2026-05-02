@@ -1,4 +1,4 @@
-# Deploy / update Phong Tro Xanh lên Ubuntu qua SSH + Docker.
+# Deploy / update Trohub lên Ubuntu qua SSH + Docker.
 # Yêu cầu: OpenSSH Client, ssh key tới server.
 #
 # Cập nhật code giữ nguyên .env (và mật khẩu DB):
@@ -16,7 +16,7 @@
 param(
     [string] $Server = "10.0.150.63",
     [string] $User = "ubuntu",
-    [string] $RemoteDir = "/home/ubuntu/phong-tro-xanh",
+    [string] $RemoteDir = "/home/ubuntu/trohub",
     [string] $PublicHost = "10.0.150.63",
     [string] $ApiPublicHost = "",
     [int] $ApiPort = 5001,
@@ -27,7 +27,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$tgz = Join-Path $env:TEMP "phong-tro-xanh-deploy.tgz"
+$tgz = Join-Path $env:TEMP "trohub-deploy.tgz"
 
 Push-Location $ProjectRoot
 try {

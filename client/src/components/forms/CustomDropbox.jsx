@@ -21,7 +21,7 @@ const CustomDropBox = ({ onSelect, isMultiple = false, media = [], onRemove, err
       },
       linkType: "preview", // hoặc "preview"
       multiselect: isMultiple,
-      extensions: [".jpg", ".png", ".mp4"],
+      extensions: [".jpg", ".png", ".mp4", ".jpeg", ".webp"],
     }
 
     window.Dropbox.choose(options)

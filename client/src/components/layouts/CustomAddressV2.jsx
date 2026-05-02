@@ -64,8 +64,8 @@ const CustomAddressV2 = () => {
   useEffect(() => {
     const fetchDistricts = async () => {
       const response = await apiGetDistrictsByProvinceId(provinceId)
-      if (response.status === 200) {
-        setDistricts(response.data?.map((el) => ({ label: el.name, value: el.idDistrict })))
+      if (response.data?.error === 0) {
+        setDistricts(response.data.data?.map((el) => ({ label: el.full_name, value: el.id })))
       }
     }
     if (provinceId) {
@@ -74,13 +74,13 @@ const CustomAddressV2 = () => {
   }, [provinceId])
 
   useEffect(() => {
-    const fetchDistricts = async () => {
+    const fetchWards = async () => {
       const response = await apiGetWardsByDistrictId(districtId)
-      if (response.status === 200) {
-        setWards(response.data?.map((el) => ({ label: el.name, value: el.idCommune })))
+      if (response.data?.error === 0) {
+        setWards(response.data.data?.map((el) => ({ label: el.full_name, value: el.id })))
       }
     }
-    if (districtId) fetchDistricts()
+    if (districtId) fetchWards()
   }, [districtId])
 
   useEffect(() => {

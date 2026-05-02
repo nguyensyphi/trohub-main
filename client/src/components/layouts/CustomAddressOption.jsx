@@ -33,8 +33,8 @@ const CustomAddressOption = ({ form }) => {
   useEffect(() => {
     const fetchDistricts = async () => {
       const response = await apiGetDistrictsByProvinceId(provinceId)
-      if (response.status === 200) {
-        setDistricts(response.data?.map((el) => ({ label: el.name, value: el.idDistrict })))
+      if (response.data && response.data.error === 0) {
+        setDistricts(response.data.data?.map((el) => ({ label: el.full_name, value: el.id })))
       }
     }
     if (provinceId) {
@@ -44,13 +44,13 @@ const CustomAddressOption = ({ form }) => {
 
   // Fetch wards from district id
   useEffect(() => {
-    const fetchDistricts = async () => {
+    const fetchWards = async () => {
       const response = await apiGetWardsByDistrictId(districtId)
-      if (response.status === 200) {
-        setWards(response.data?.map((el) => ({ label: el.name, value: el.idCommune })))
+      if (response.data && response.data.error === 0) {
+        setWards(response.data.data?.map((el) => ({ label: el.full_name, value: el.id })))
       }
     }
-    if (districtId) fetchDistricts()
+    if (districtId) fetchWards()
   }, [districtId])
 
   // Update labels when change
@@ -85,18 +85,32 @@ const CustomAddressOption = ({ form }) => {
   // Get locations from address text
   useEffect(() => {
     const fetchLocations = async () => {
-      const response = await apiGetLocationsFromSearchTerm(address)
-      if (response.status === 200) {
-        const dataFormat = response.data?.map((el) => ({
-          longitude: +el.lon,
-          latitude: +el.lat,
-          displayName: el.display_name,
-        }))
-        setLocations(dataFormat)
+      const mapQueryArr = [
+        handleTakeNameFromId(wards, wardId),
+        handleTakeNameFromId(districts, districtId),
+        handleTakeNameFromId(provinces, provinceId)
+      ].filter(Boolean);
+      
+      while (mapQueryArr.length > 0) {
+        const searchAddress = mapQueryArr.join(", ");
+        const response = await apiGetLocationsFromSearchTerm(`${searchAddress}, Vietnam`);
+        
+        if (response.status === 200 && response.data?.length > 0) {
+          const dataFormat = response.data.map((el) => ({
+            longitude: +el.lon,
+            latitude: +el.lat,
+            displayName: el.display_name,
+          }));
+          setLocations(dataFormat);
+          break;
+        } else {
+          // Xoá địa chỉ chi tiết nhất ở vị trí đầu nếu không tìm thấy (fallback về cấp trên)
+          mapQueryArr.shift();
+        }
       }
     }
-    if (address) fetchLocations()
-  }, [address])
+    if (wardId || districtId || provinceId) fetchLocations()
+  }, [wardId, districtId, provinceId, wards, districts, provinces])
   return (
     <div className="grid grid-cols-2 gap-4">
       <CustomSelect

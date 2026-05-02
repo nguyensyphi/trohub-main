@@ -24,7 +24,7 @@ const pathnames = {
     wishlist: "tin-dang-yeu-thich",
     seenPost: "tin-dang-da-xem",
     deposit: "nap-tien",
-    depositVnpay: "nap-tien-vnpay",
+    depositMomo: "nap-tien-momo",
     paymentHistory: "lich-su-nap-tien",
     expiredHistory: "lich-su-gia-han",
     balanceInfo: "thong-tin-so-du",
